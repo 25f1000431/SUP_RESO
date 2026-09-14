@@ -2,4 +2,11 @@
 __pycache__/
 *.pyc 
 .env/
+backend/outputs/node_modules/
+backend/.env
 backend/outputs/
+*.pth
+__pycache__/
+*.pyc
+.vite/
+frontend/node_modules/
