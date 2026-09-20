@@ -1,0 +1,256 @@
+.hero-bg{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:-1;
+
+  background:
+  radial-gradient(circle at 75% 40%,
+  rgba(90,255,120,.25),
+  transparent 40%),
+  #020808;
+}
+
+/* =========================
+   STARS
+========================= */
+
+.stars{
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(circle at 5% 10%, #fff 1px, transparent 2px),
+  radial-gradient(circle at 12% 35%, #8fff57 2px, transparent 4px),
+  radial-gradient(circle at 20% 20%, #fff 1px, transparent 2px),
+  radial-gradient(circle at 30% 50%, #fff 2px, transparent 4px),
+  radial-gradient(circle at 40% 25%, #8fff57 2px, transparent 4px),
+  radial-gradient(circle at 55% 15%, #fff 1px, transparent 2px),
+  radial-gradient(circle at 65% 40%, #fff 2px, transparent 4px),
+  radial-gradient(circle at 75% 20%, #8fff57 2px, transparent 4px),
+  radial-gradient(circle at 85% 55%, #fff 1px, transparent 2px),
+  radial-gradient(circle at 95% 30%, #fff 2px, transparent 4px);
+
+  animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{
+    opacity:.5;
+  }
+
+  to{
+    opacity:1;
+  }
+}
+
+/* =========================
+   SHOOTING STARS
+========================= */
+
+.shooting{
+  position:absolute;
+  width:150px;
+  height:2px;
+
+  background:
+  linear-gradient(
+    90deg,
+    rgba(255,255,255,1),
+    rgba(255,255,255,0)
+  );
+
+  transform:rotate(-35deg);
+}
+
+.shooting1{
+  top:120px;
+  left:250px;
+
+  animation:
+  shoot1 8s linear infinite;
+}
+
+.shooting2{
+  top:350px;
+  left:80px;
+
+  animation:
+  shoot2 10s linear infinite;
+}
+
+@keyframes shoot1{
+  0%{
+    transform:
+    translateX(0)
+    rotate(-35deg);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+    translateX(300px)
+    rotate(-35deg);
+
+    opacity:0;
+  }
+}
+
+@keyframes shoot2{
+  0%{
+    transform:
+    translateX(0)
+    rotate(-35deg);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+    translateX(250px)
+    rotate(-35deg);
+
+    opacity:0;
+  }
+}
+
+/* =========================
+   EARTH
+========================= */
+
+.earth-wrapper{
+  position:absolute;
+
+  right:5px;
+  top:70px;
+
+  width:620px;
+  height:620px;
+}
+
+.earth{
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  border-radius:50%;
+
+  filter:
+  drop-shadow(0 0 30px #67ff8f)
+  drop-shadow(0 0 70px #67ff8f);
+}
+
+/* =========================
+   ORBITS
+========================= */
+
+.orbit{
+  position:absolute;
+  border-radius:50%;
+
+  border:
+  1px dashed
+  rgba(120,255,120,.35);
+}
+
+/* Close orbit */
+
+.orbit1{
+  inset:-40px;
+
+  animation:
+  orbitSpin 20s linear infinite;
+}
+
+/* Medium orbit */
+
+.orbit2{
+  inset:-90px;
+
+  animation:
+  orbitSpin 28s linear infinite reverse;
+}
+
+/* Large orbit */
+
+.orbit3{
+  inset:-140px;
+
+  animation:
+  orbitSpin 36s linear infinite;
+}
+
+@keyframes orbitSpin{
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* =========================
+   SATELLITES
+========================= */
+
+.satellite-holder{
+  position:absolute;
+
+  left:50%;
+  top:-20px;
+
+  transform:
+  translateX(-50%);
+}
+
+.satellite{
+  width:48px;
+  height:auto;
+
+  filter:
+  drop-shadow(0 0 8px #fff);
+}
+
+/* =========================
+   GLOW NODES
+========================= */
+
+.node{
+  position:absolute;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:#8fff57;
+
+  box-shadow:
+  0 0 10px #8fff57,
+  0 0 20px #8fff57;
+}
+
+.node1{
+  bottom:20%;
+  left:5%;
+}
+
+.node2{
+  top:10%;
+  right:15%;
+}
+
+.node3{
+  bottom:5%;
+  right:30%;
+}

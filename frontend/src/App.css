@@ -41,14 +41,26 @@ button {
    APP
    ============================================================ */
 
-.app {
-  min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at top center,
-      #162018 0%,
-      #090c0a 45%
-    );
+.hero{
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+
+  padding-left:120px;
+
+  position:relative;
+  z-index:2;
+}
+
+.hero-left{
+  width:55%;
+}
+
+.hero-right{
+  width:45%;
 }
 
 
@@ -57,16 +69,18 @@ button {
    ============================================================ */
 
 .hero {
-  width: min(1100px, calc(100% - 40px));
+  width: min(1100px, calc(100% - 10px));
 
   margin: 0 auto;
-  padding: 70px 0 45px;
+  padding: 7px 0 45px;
 }
 
 .hero-badge {
-  display: inline-block;
+  display: inline-flex;
 
-  padding: 7px 12px;
+  padding: 6px 10px;
+
+  width: fit-content;
 
   border: 1px solid #3e5633;
   border-radius: 999px;
@@ -76,8 +90,9 @@ button {
   color: #91d45d;
 
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
 }
 
 .hero h1 {
