@@ -307,7 +307,7 @@ function App() {
             DIAGNOSTICS
             ================================================= */}
 
-        {diagnostics && (
+        { diagnostics && (
           <section className="diagnostic-section">
             <div className="diagnostic-title">DIAGNOSTIC INFORMATION</div>
 
@@ -369,7 +369,7 @@ function App() {
                   {diagnostics.clipping?.clipped_low_percent?.toFixed(2)}%
                 </strong>
               </div>
-            </div>
+            </div>*/
 
             {/* =================================================
                 BAND TABLE
