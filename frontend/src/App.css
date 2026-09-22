@@ -1198,3 +1198,472 @@ footer p {
     grid-template-columns: 1fr;
   }
 }
+
+
+
+/* ============================================================
+   IMAGE COMPARISON
+   ============================================================ */
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto 42px;
+}
+
+.image-card {
+  min-width: 0;
+  padding: 20px;
+
+  border: 1px solid #29322d;
+  border-radius: 18px;
+
+  background: #101512;
+}
+
+.image-card h3 {
+  margin: 0 0 7px;
+  color: #f1f3ef;
+  font-size: 18px;
+}
+
+.image-meta {
+  margin: 0 0 16px;
+  color: #727c75;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.image-card img {
+  display: block;
+
+  width: 100%;
+  height: 420px;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  background: #080b09;
+}
+
+
+
+@media (max-width: 800px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+    width: calc(100% - 32px);
+  }
+
+  .image-card img {
+    height: 360px;
+  }
+}
+/* ============================================================
+   SEGMENTATION ANALYSIS
+   ============================================================ */
+
+.segmentation-section {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 40px;
+}
+
+.segmentation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+
+  margin-bottom: 20px;
+}
+
+.segmentation-eyebrow {
+  margin-bottom: 6px;
+
+  color: #6f7c74;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.segmentation-header h2 {
+  margin: 0 0 6px;
+
+  color: #f1f3ef;
+
+  font-size: 24px;
+}
+
+.segmentation-header p {
+  margin: 0;
+
+  color: #7f8a83;
+
+  font-size: 13px;
+}
+
+.segmentation-status {
+  padding: 8px 12px;
+
+  border: 1px solid #29352e;
+  border-radius: 999px;
+
+  color: #9eafa4;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   SUMMARY CARDS
+   ============================================================ */
+
+.segmentation-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.segmentation-card {
+  padding: 20px;
+
+  min-height: 120px;
+
+  border: 1px solid #29322d;
+  border-radius: 16px;
+
+  background: #101512;
+}
+
+.segmentation-card span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #707b74;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.segmentation-card strong {
+  display: block;
+
+  color: #f1f3ef;
+
+  font-size: 30px;
+  line-height: 1;
+}
+
+.segmentation-card small {
+  display: block;
+
+  margin-top: 9px;
+
+  color: #77827b;
+
+  font-size: 11px;
+}
+
+
+/* ============================================================
+   ANALYSIS GRID
+   ============================================================ */
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+.analysis-card {
+  padding: 22px;
+
+  border: 1px solid #29322d;
+  border-radius: 16px;
+
+  background: #101512;
+}
+
+.analysis-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.analysis-card-header h3 {
+  margin: 0;
+
+  color: #f1f3ef;
+
+  font-size: 16px;
+}
+
+.analysis-card-header span {
+  color: #68736c;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+
+/* ============================================================
+   HEALTH SCORE
+   ============================================================ */
+
+.health-score {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  margin-bottom: 4px;
+}
+
+.health-score strong {
+  color: #f1f3ef;
+
+  font-size: 54px;
+  line-height: 1;
+}
+
+.health-score span {
+  color: #69746d;
+
+  font-size: 14px;
+}
+
+.health-label {
+  margin-bottom: 24px;
+
+  color: #9da9a1;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.health-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+}
+
+.health-details div {
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #0b0f0d;
+}
+
+.health-details span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #68736c;
+
+  font-size: 10px;
+}
+
+.health-details strong {
+  color: #dce2dd;
+
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   VIGOR DISTRIBUTION
+   ============================================================ */
+
+.vigor-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.vigor-row {
+  display: grid;
+  grid-template-columns: 85px 1fr 58px;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.vigor-row > span {
+  color: #8a958e;
+
+  font-size: 11px;
+}
+
+.vigor-row > strong {
+  color: #cbd3ce;
+
+  font-size: 11px;
+  text-align: right;
+}
+
+.vigor-bar {
+  height: 7px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #202823;
+}
+
+.vigor-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: #8fa497;
+}
+
+
+/* ============================================================
+   DOWNLOAD / NOTE
+   ============================================================ */
+
+.segmentation-downloads {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 18px;
+}
+
+.analysis-note {
+  color: #69746d;
+
+  font-size: 11px;
+}
+
+
+
+
+/* ==========================================================
+   VISUAL ANALYSIS MAPS
+   ========================================================== */
+
+.analysis-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+.analysis-image-card {
+  background: #ffffff;
+  border: 1px solid rgba(24, 67, 42, 0.12);
+  border-radius: 20px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.analysis-image-card .analysis-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.analysis-image-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #173d29;
+}
+
+.analysis-image-card .analysis-card-header span {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #718078;
+}
+
+.analysis-map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  background: #eef3ee;
+}
+
+
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+  .segmentation-section {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .segmentation-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .segmentation-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .segmentation-downloads {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analysis-image-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+
+.segmentation-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0 32px;
+}
+
+.segmentation-toggle {
+  padding: 13px 26px;
+  border: 1px solid #8bd45a;
+  border-radius: 10px;
+  background: transparent;
+  color: #8bd45a;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.segmentation-toggle:hover {
+  background: #8bd45a;
+  color: #101410;
+}

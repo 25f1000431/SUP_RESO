@@ -115,6 +115,7 @@ function App() {
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [showSegmentation, setShowSegmentation] = useState(false);
 
   // ==========================================================
   // MAP
@@ -257,7 +258,7 @@ function App() {
         <section className="comparison-grid">
           <div className="image-card">
             <h3>Original Sentinel-2</h3>
-            <p className="image-meta">10m • B04 / B03 / B02</p>
+            <p className="image-meta">10m • B04 / B03 / B02 / B08</p>
 
             {result.original_preview && (
               <img src={result.original_preview} alt="Original Sentinel-2" />
@@ -266,7 +267,7 @@ function App() {
 
           <div className="image-card">
             <h3>AI Super-Resolved</h3>
-            <p className="image-meta">2.5m • AI-derived output</p>
+            <p className="image-meta">2.5m GSD • B02 / B03 / B04 / B08 Super Resolved output </p>
 
             {result.sr_preview && (
               <img
@@ -276,176 +277,6 @@ function App() {
             )}
           </div>
         </section>
-
-        {/* =================================================
-            RESULT INFO
-            ================================================= */}
-
-        <section className="result-info">
-          <div className="info-card">
-            <span>Input Resolution</span>
-            <strong>{result.sentinel2?.resolution_m || 10}m</strong>
-          </div>
-
-          <div className="info-card">
-            <span>Output Resolution</span>
-            <strong>{result.output?.resolution_m || 2.5}m</strong>
-          </div>
-
-          <div className="info-card">
-            <span>Model Device</span>
-            <strong>{result.device || "Unknown"}</strong>
-          </div>
-
-          <div className="info-card">
-            <span>Input Bands</span>
-            <strong>B02 / B03 / B04 / B08</strong>
-          </div>
-        </section>
-
-        {/* =================================================
-            DIAGNOSTICS
-            ================================================= */}
-
-        { diagnostics && (
-          <section className="diagnostic-section">
-            <div className="diagnostic-title">DIAGNOSTIC INFORMATION</div>
-
-            <div className="diagnostic-grid">
-              <div className="diagnostic-card">
-                <span>Input Min</span>
-                <strong>
-                  {diagnostics.input_global?.min?.toFixed(6)}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Input Max</span>
-                <strong>
-                  {diagnostics.input_global?.max?.toFixed(6)}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Input Mean</span>
-                <strong>
-                  {diagnostics.input_global?.mean?.toFixed(6)}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Output Min</span>
-                <strong>
-                  {diagnostics.output_global?.min?.toFixed(6)}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Output Max</span>
-                <strong>
-                  {diagnostics.output_global?.max?.toFixed(6)}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Output Mean</span>
-                <strong>
-                  {diagnostics.output_global?.mean?.toFixed(6)}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Normalization</span>
-                <strong>
-                  {diagnostics.normalization?.divided_by_10000
-                    ? "DN → Reflectance"
-                    : "Already Reflectance"}
-                </strong>
-              </div>
-
-              <div className="diagnostic-card">
-                <span>Output Clipped at 0</span>
-                <strong>
-                  {diagnostics.clipping?.clipped_low_percent?.toFixed(2)}%
-                </strong>
-              </div>
-            </div>*/
-
-            {/* =================================================
-                BAND TABLE
-                ================================================= */}
-
-            <div className="diagnostic-table-wrapper">
-              <h3>Normalized Model Input</h3>
-              <table className="diagnostic-table">
-                <thead>
-                  <tr>
-                    <th>Band</th>
-                    <th>Min</th>
-                    <th>Mean</th>
-                    <th>P50</th>
-                    <th>P99</th>
-                    <th>Max</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {["B04", "B03", "B02", "B08"].map((band) => {
-                    const stats = diagnostics.normalized_bands?.[band];
-
-                    return (
-                      <tr key={band}>
-                        <td>{band}</td>
-                        <td>{stats?.min?.toFixed(6)}</td>
-                        <td>{stats?.mean?.toFixed(6)}</td>
-                        <td>{stats?.p50?.toFixed(6)}</td>
-                        <td>{stats?.p99?.toFixed(6)}</td>
-                        <td>{stats?.max?.toFixed(6)}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="diagnostic-table-wrapper">
-              <h3>CNN Output</h3>
-              <table className="diagnostic-table">
-                <thead>
-                  <tr>
-                    <th>Band</th>
-                    <th>Min</th>
-                    <th>Mean</th>
-                    <th>P50</th>
-                    <th>P99</th>
-                    <th>Max</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {["B04", "B03", "B02", "B08"].map((band) => {
-                    const stats = diagnostics.output_bands?.[band];
-
-                    return (
-                      <tr key={band}>
-                        <td>{band}</td>
-                        <td>{stats?.min?.toFixed(6)}</td>
-                        <td>{stats?.mean?.toFixed(6)}</td>
-                        <td>{stats?.p50?.toFixed(6)}</td>
-                        <td>{stats?.p99?.toFixed(6)}</td>
-                        <td>{stats?.max?.toFixed(6)}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        )}
-
-        {/* =================================================
-            DOWNLOAD
-            ================================================= */}
 
         {result.output?.download_url && (
           <div className="download-section">
@@ -459,6 +290,454 @@ function App() {
             </a>
           </div>
         )}
+
+
+
+
+        {/* =================================================
+            SEGMENTATION ANALYSIS
+            ================================================= */}
+
+        {result.segmentation?.status === "completed" && (
+          <>
+            {/* =================================================
+                VIEW / HIDE SEGMENTATION BUTTON
+                ================================================= */}
+
+            <div className="segmentation-toggle-wrapper">
+              <button
+                type="button"
+                className="segmentation-toggle"
+                onClick={() => setShowSegmentation((prev) => !prev)}
+              >
+                {showSegmentation
+                  ? "Hide Segmentation Analysis"
+                  : "View Segmentation Analysis"}
+              </button>
+            </div>
+
+
+            {/* =================================================
+                SEGMENTATION ANALYSIS CONTENT
+                ================================================= */}
+
+            {showSegmentation && (
+              <section className="segmentation-section">
+
+                <div className="segmentation-header">
+
+                  <div>
+                    <div className="segmentation-eyebrow">
+                      DEEPLABV3+ · RESNET34
+                    </div>
+
+                    <h2>Segmentation Analysis</h2>
+
+                    <p>
+                      Model-derived land-cover and vegetation analysis
+                      from the AI super-resolved imagery.
+                    </p>
+                  </div>
+
+                  <div className="segmentation-status">
+                    ● ANALYSIS COMPLETE
+                  </div>
+
+                </div>
+
+
+                {/* =================================================
+                    SEGMENTATION SUMMARY CARDS
+                    ================================================= */}
+
+                <div className="segmentation-cards">
+
+                  <div className="segmentation-card">
+                    <span>CROPLAND</span>
+
+                    <strong>
+                      {result.segmentation.classes?.cropland?.percentage?.toFixed(2)}%
+                    </strong>
+
+                    <small>
+                      {result.segmentation.classes?.cropland?.area_hectares?.toFixed(2)} ha
+                    </small>
+                  </div>
+
+
+                  <div className="segmentation-card">
+                    <span>LANDSLIDE</span>
+
+                    <strong>
+                      {result.segmentation.classes?.landslide?.percentage?.toFixed(2)}%
+                    </strong>
+
+                    <small>
+                      {result.segmentation.classes?.landslide?.area_hectares?.toFixed(2)} ha
+                    </small>
+                  </div>
+
+
+                  <div className="segmentation-card">
+                    <span>MEAN CROP NDVI</span>
+
+                    <strong>
+                      {result.segmentation.crop_health?.mean_ndvi?.toFixed(4)}
+                    </strong>
+
+                    <small>
+                      Median {result.segmentation.crop_health?.median_ndvi?.toFixed(4)}
+                    </small>
+                  </div>
+
+
+                  <div className="segmentation-card">
+                    <span>CROP HEALTH INDEX</span>
+
+                    <strong>
+                      {result.segmentation.crop_health?.health_score?.toFixed(0)}
+                    </strong>
+
+                    <small>
+                      {result.segmentation.crop_health?.health_label}
+                    </small>
+                  </div>
+
+                </div>
+
+
+                {/* =================================================
+                    VISUAL ANALYSIS MAPS
+                    ================================================= */}
+
+                <div className="analysis-image-grid">
+
+                  {/* Segmentation Map */}
+
+                  <div className="analysis-image-card">
+
+                    <div className="analysis-card-header">
+
+                      <div>
+                        <h3>Cropland Segmentation</h3>
+                        <span>
+                          DeepLabV3+ · ResNet34
+                        </span>
+                      </div>
+
+                    </div>
+
+                    {result.segmentation?.preview_url && (
+                      <img
+                        src={`${API_URL}${result.segmentation.preview_url}`}
+                        alt="Cropland segmentation map"
+                        className="analysis-map-image"
+                      />
+                    )}
+
+                  </div>
+
+
+                  {/* NDVI Map */}
+
+                  <div className="analysis-image-card">
+
+                    <div className="analysis-card-header">
+
+                      <div>
+                        <h3>Crop NDVI Map</h3>
+                        <span>
+                          Vegetation index
+                        </span>
+                      </div>
+
+                    </div>
+
+                    {result.segmentation?.ndvi_preview_url && (
+                      <img
+                        src={`${API_URL}${result.segmentation.ndvi_preview_url}`}
+                        alt="Crop NDVI map"
+                        className="analysis-map-image"
+                      />
+                    )}
+
+                  </div>
+
+
+                  {/* Crop Health Map */}
+
+                  <div className="analysis-image-card">
+
+                    <div className="analysis-card-header">
+
+                      <div>
+                        <h3>Crop Health Index</h3>
+
+                        <span>
+                          {result.segmentation?.crop_health?.health_score != null
+                            ? `${result.segmentation.crop_health.health_score.toFixed(1)}/100`
+                            : "Health unavailable"}
+
+                          {result.segmentation?.crop_health?.health_label
+                            ? ` · ${result.segmentation.crop_health.health_label}`
+                            : ""}
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                    {result.segmentation?.health_preview_url && (
+                      <img
+                        src={`${API_URL}${result.segmentation.health_preview_url}`}
+                        alt="Crop health index map"
+                        className="analysis-map-image"
+                      />
+                    )}
+
+                  </div>
+
+                </div>
+
+
+                {/* =================================================
+                    CROP HEALTH + VEGETATION VIGOR
+                    ================================================= */}
+
+                <div className="analysis-grid">
+
+                  {/* Crop Health */}
+
+                  <div className="analysis-card">
+
+                    <div className="analysis-card-header">
+                      <h3>Crop Health</h3>
+                      <span>NDVI-based</span>
+                    </div>
+
+
+                    <div className="health-score">
+
+                      <strong>
+                        {result.segmentation.crop_health?.health_score?.toFixed(0)}
+                      </strong>
+
+                      <span>/ 100</span>
+
+                    </div>
+
+
+                    <div className="health-label">
+                      {result.segmentation.crop_health?.health_label}
+                    </div>
+
+
+                    <div className="health-details">
+
+                      <div>
+                        <span>Mean NDVI</span>
+
+                        <strong>
+                          {result.segmentation.crop_health?.mean_ndvi?.toFixed(4)}
+                        </strong>
+                      </div>
+
+
+                      <div>
+                        <span>Min NDVI</span>
+
+                        <strong>
+                          {result.segmentation.crop_health?.min_ndvi?.toFixed(4)}
+                        </strong>
+                      </div>
+
+
+                      <div>
+                        <span>Max NDVI</span>
+
+                        <strong>
+                          {result.segmentation.crop_health?.max_ndvi?.toFixed(4)}
+                        </strong>
+                      </div>
+
+
+                      <div>
+                        <span>NDVI Std.</span>
+
+                        <strong>
+                          {result.segmentation.crop_health?.std_ndvi?.toFixed(4)}
+                        </strong>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  {/* Vegetation Vigor Distribution */}
+
+                  <div className="analysis-card">
+
+                    <div className="analysis-card-header">
+                      <h3>Vegetation Vigor Distribution</h3>
+                      <span>Crop pixels</span>
+                    </div>
+
+
+                    <div className="vigor-list">
+
+                      {/* Very Low */}
+
+                      <div className="vigor-row">
+
+                        <span>Very Low</span>
+
+                        <div className="vigor-bar">
+                          <div
+                            className="vigor-fill"
+                            style={{
+                              width: `${result.segmentation.vigor_distribution?.very_low || 0}%`,
+                            }}
+                          />
+                        </div>
+
+                        <strong>
+                          {result.segmentation.vigor_distribution?.very_low?.toFixed(2)}%
+                        </strong>
+
+                      </div>
+
+
+                      {/* Low */}
+
+                      <div className="vigor-row">
+
+                        <span>Low</span>
+
+                        <div className="vigor-bar">
+                          <div
+                            className="vigor-fill"
+                            style={{
+                              width: `${result.segmentation.vigor_distribution?.low || 0}%`,
+                            }}
+                          />
+                        </div>
+
+                        <strong>
+                          {result.segmentation.vigor_distribution?.low?.toFixed(2)}%
+                        </strong>
+
+                      </div>
+
+
+                      {/* Moderate */}
+
+                      <div className="vigor-row">
+
+                        <span>Moderate</span>
+
+                        <div className="vigor-bar">
+                          <div
+                            className="vigor-fill"
+                            style={{
+                              width: `${result.segmentation.vigor_distribution?.moderate || 0}%`,
+                            }}
+                          />
+                        </div>
+
+                        <strong>
+                          {result.segmentation.vigor_distribution?.moderate?.toFixed(2)}%
+                        </strong>
+
+                      </div>
+
+
+                      {/* High */}
+
+                      <div className="vigor-row">
+
+                        <span>High</span>
+
+                        <div className="vigor-bar">
+                          <div
+                            className="vigor-fill"
+                            style={{
+                              width: `${result.segmentation.vigor_distribution?.high || 0}%`,
+                            }}
+                          />
+                        </div>
+
+                        <strong>
+                          {result.segmentation.vigor_distribution?.high?.toFixed(2)}%
+                        </strong>
+
+                      </div>
+
+
+                      {/* Very High */}
+
+                      <div className="vigor-row">
+
+                        <span>Very High</span>
+
+                        <div className="vigor-bar">
+                          <div
+                            className="vigor-fill"
+                            style={{
+                              width: `${result.segmentation.vigor_distribution?.very_high || 0}%`,
+                            }}
+                          />
+                        </div>
+
+                        <strong>
+                          {result.segmentation.vigor_distribution?.very_high?.toFixed(2)}%
+                        </strong>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                {/* =================================================
+                    SEGMENTATION DOWNLOAD
+                    ================================================= */}
+
+                <div className="segmentation-downloads">
+
+                  <a
+                    className="download-button"
+                    href={`${API_URL}${result.segmentation.download_url}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Download Segmentation GeoTIFF
+                  </a>
+
+                  {result.segmentation.ndvi_path && (
+                    <span className="analysis-note">
+                      NDVI analysis generated from the 4-band SR output.
+                    </span>
+                  )}
+
+                </div>
+
+              </section>
+            )}
+
+          </>
+        )}
+        
+
+        
+        {/* =================================================
+            DOWNLOAD
+            ================================================= */}
+
+
       </div>
     );
   }
