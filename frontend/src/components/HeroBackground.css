@@ -129,11 +129,11 @@
 .earth-wrapper{
   position:absolute;
 
-  right:5px;
-  top:70px;
+  right:15px;
+  top:50px;
 
-  width:620px;
-  height:620px;
+  width:700px;
+  height:700px;
 }
 
 .earth{

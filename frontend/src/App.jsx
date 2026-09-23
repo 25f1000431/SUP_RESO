@@ -208,6 +208,8 @@ function App() {
 
     return (
       <div className="app">
+
+       <HeroBackground />
         <section className="hero">
           <div className="hero-left">
             <div className="eyebrow">SENTINEL-2 · 10M → 2.5M</div>
