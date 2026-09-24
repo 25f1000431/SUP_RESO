@@ -23,7 +23,11 @@ app.add_middleware(
     CORSMiddleware,
     # Any localhost/127.0.0.1 port -- convenient in dev since Vite may
     # pick a different port each run. Tighten this before deploying.
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
+    
+   allow_origins=[
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
